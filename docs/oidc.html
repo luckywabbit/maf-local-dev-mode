@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OIDC configuration guide for Maximo Application Configuration - Local Dev Mode">
+    <title>OIDC Setup - Maximo Local Dev Mode</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="nav-logo">
+                    <span class="logo-icon">⬡</span>
+                    <span class="logo-text">Maximo Local Dev</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="install.html">Install</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="oidc.html" class="active" aria-current="page">OIDC Setup</a></li>
+                <li><a href="manual.html">Manual Install</a></li>
+                <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Page Header -->
+        <section class="section section-dark">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">OIDC Configuration</h1>
+                    <p class="page-subtitle">Set up OAuth/OIDC authentication for remote MAS environments</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Overview</h2>
+                    <p class="section-description">
+                        When connecting to a remote Maximo Application Suite (MAS) environment, you need to configure 
+                        OAuth/OIDC authentication. This guide covers two approaches: automatic setup using OpenShift 
+                        credentials, and manual configuration.
+                    </p>
+
+                    <div class="info-box info-box-blue">
+                        <div class="info-icon">ℹ️</div>
+                        <div class="info-content">
+                            <strong>When do you need OIDC?</strong>
+                            <ul>
+                                <li><strong>Local Manage:</strong> No OIDC setup required</li>
+                                <li><strong>Remote MAS:</strong> OIDC configuration is required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prerequisites -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Prerequisites</h2>
+                    
+                    <div class="requirements-grid">
+                        <div class="requirement-card">
+                            <div class="requirement-icon">🟢</div>
+                            <h3 class="requirement-title">Node.js</h3>
+                            <p class="requirement-version">Version 20.0.0 or higher</p>
+                            <p class="requirement-description">
+                                Required for running the OIDC registration script.
+                            </p>
+                        </div>
+
+                        <div class="requirement-card">
+                            <div class="requirement-icon">🔑</div>
+                            <h3 class="requirement-title">MAS Credentials</h3>
+                            <p class="requirement-version">Client ID & Secret</p>
+                            <p class="requirement-description">
+                                OAuth client credentials from your MAS administrator.
+                            </p>
+                        </div>
+
+                        <div class="requirement-card">
+                            <div class="requirement-icon">☸️</div>
+                            <h3 class="requirement-title">OpenShift CLI (Optional)</h3>
+                            <p class="requirement-version">For automatic setup</p>
+                            <p class="requirement-description">
+                                Required only for automatic credential retrieval from OpenShift.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Setup -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Quick Setup (Recommended)</h2>
+                    <p class="section-description">
+                        The fastest way to configure OIDC authentication. This interactive wizard guides you through 
+                        the setup process.
+                    </p>
+
+                    <div class="install-box">
+                        <div class="install-header">
+                            <span class="install-label">Automated OIDC Setup</span>
+                            <span class="install-badge">Recommended</span>
+                        </div>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy OIDC setup command">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/oidc.sh | bash</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="setup-flow">
+                        <h3 class="setup-flow-title">What the wizard does:</h3>
+                        <div class="setup-steps">
+                            <div class="setup-step">
+                                <div class="setup-step-number">1</div>
+                                <div class="setup-step-content">
+                                    <h4>Check Prerequisites</h4>
+                                    <p>Verifies Node.js and npm are installed</p>
+                                </div>
+                            </div>
+                            <div class="setup-step">
+                                <div class="setup-step-number">2</div>
+                                <div class="setup-step-content">
+                                    <h4>Choose Credential Source</h4>
+                                    <p>Automatic (OpenShift) or manual entry</p>
+                                </div>
+                            </div>
+                            <div class="setup-step">
+                                <div class="setup-step-number">3</div>
+                                <div class="setup-step-content">
+                                    <h4>Register OIDC Client</h4>
+                                    <p>Configures authentication with MAS</p>
+                                </div>
+                            </div>
+                            <div class="setup-step">
+                                <div class="setup-step-number">4</div>
+                                <div class="setup-step-content">
+                                    <h4>Save Configuration</h4>
+                                    <p>Stores credentials securely for the extension</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automatic Setup with OpenShift -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Automatic Setup with OpenShift</h2>
+                    <p class="section-description">
+                        If you have access to the OpenShift cluster where MAS is deployed, you can automatically 
+                        retrieve credentials from the cluster secrets.
+                    </p>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 1: Install OpenShift CLI</h3>
+                        <p>If you don't have the OpenShift CLI installed:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy OpenShift CLI install">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code># macOS (Homebrew)
+brew install openshift-cli
+
+# Linux
+curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz
+tar xvf openshift-client-linux.tar.gz
+sudo mv oc /usr/local/bin/
+
+# Windows (Chocolatey)
+choco install openshift-cli</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 2: Login to OpenShift</h3>
+                        <p>Authenticate with your OpenShift cluster:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy OpenShift login">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>oc login https://your-openshift-cluster.com:6443</code></pre>
+                        </div>
+                        <p class="method-note">
+                            You can get the login command from the OpenShift web console: 
+                            Click your username → "Copy login command"
+                        </p>
+                    </div>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 3: Run Automatic Setup</h3>
+                        <p>Execute the OIDC setup script with automatic mode:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy automatic setup">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/oidc.sh | bash -s -- --auto</code></pre>
+                        </div>
+                        <p class="method-note">
+                            The script will automatically detect your MAS namespace and retrieve credentials from 
+                            the cluster secrets.
+                        </p>
+                    </div>
+
+                    <div class="info-box info-box-green">
+                        <div class="info-icon">✓</div>
+                        <div class="info-content">
+                            <strong>What gets retrieved automatically:</strong>
+                            <ul>
+                                <li>OAuth Client ID</li>
+                                <li>OAuth Client Secret</li>
+                                <li>MAS URL</li>
+                                <li>Token endpoint URL</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manual Setup -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Manual Setup</h2>
+                    <p class="section-description">
+                        If you don't have OpenShift access or prefer manual configuration, you can enter credentials 
+                        directly. You'll need to obtain these from your MAS administrator.
+                    </p>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 1: Obtain Credentials</h3>
+                        <p>Request the following information from your MAS administrator:</p>
+                        <div class="credential-list">
+                            <div class="credential-item">
+                                <div class="credential-label">MAS URL</div>
+                                <div class="credential-example">https://your-mas-instance.example.com</div>
+                            </div>
+                            <div class="credential-item">
+                                <div class="credential-label">Client ID</div>
+                                <div class="credential-example">maximo-dev-client</div>
+                            </div>
+                            <div class="credential-item">
+                                <div class="credential-label">Client Secret</div>
+                                <div class="credential-example">••••••••••••••••</div>
+                            </div>
+                            <div class="credential-item">
+                                <div class="credential-label">Token URL (Optional)</div>
+                                <div class="credential-example">https://your-mas-instance.example.com/oauth2/token</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 2: Download Setup Script</h3>
+                        <p>Download the OIDC configuration script:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy download command">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/oidc.sh -o oidc.sh
+chmod +x oidc.sh</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 3: Run Interactive Setup</h3>
+                        <p>Execute the script and choose manual entry:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy run command">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>./oidc.sh</code></pre>
+                        </div>
+                        <p class="method-note">
+                            The script will prompt you for each credential. The token URL will be auto-detected 
+                            if you don't provide it.
+                        </p>
+                    </div>
+
+                    <div class="method-detail">
+                        <h3 class="method-detail-title">Step 4: Verify Configuration</h3>
+                        <p>Check that your configuration was saved correctly:</p>
+                        <div class="code-block">
+                            <button class="copy-button" aria-label="Copy verify command">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <pre><code>cat ~/.maximo-dev-tools/oidc-config.json</code></pre>
+                        </div>
+                        <p class="method-note">
+                            You should see your MAS URL and client ID (the secret is encrypted).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Advanced Configuration</h2>
+                    
+                    <div class="advanced-topics">
+                        <details class="advanced-topic">
+                            <summary class="advanced-topic-title">
+                                <span class="topic-icon">🔧</span>
+                                <span class="topic-text">Multiple Environments</span>
+                            </summary>
+                            <div class="advanced-topic-content">
+                                <p>
+                                    You can configure multiple MAS environments and switch between them. Each 
+                                    environment gets its own configuration profile.
+                                </p>
+                                <div class="code-block">
+                                    <button class="copy-button" aria-label="Copy multi-env command">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                    <pre><code># Set up development environment
+export MAS_ENV=dev
+./oidc.sh
+
+# Set up production environment
+export MAS_ENV=prod
+./oidc.sh
+
+# Switch environments in VSCode
+# Use Command Palette: "Maximo: Switch Environment"</code></pre>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="advanced-topic">
+                            <summary class="advanced-topic-title">
+                                <span class="topic-icon">🔒</span>
+                                <span class="topic-text">Self-Signed Certificates</span>
+                            </summary>
+                            <div class="advanced-topic-content">
+                                <p>
+                                    For development environments using self-signed certificates, you can configure 
+                                    the extension to trust them.
+                                </p>
+                                <div class="code-block">
+                                    <button class="copy-button" aria-label="Copy cert config">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                    <pre><code># Add to ~/.maximo-dev-tools/oidc-config.json
+{
+  "masUrl": "https://your-mas.example.com",
+  "clientId": "your-client-id",
+  "rejectUnauthorized": false
+}</code></pre>
+                                </div>
+                                <div class="info-box info-box-yellow">
+                                    <div class="info-icon">⚠️</div>
+                                    <div class="info-content">
+                                        <strong>Security Warning:</strong>
+                                        <p>Only disable certificate validation for trusted development environments.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="advanced-topic">
+                            <summary class="advanced-topic-title">
+                                <span class="topic-icon">⏱️</span>
+                                <span class="topic-text">Token Refresh Settings</span>
+                            </summary>
+                            <div class="advanced-topic-content">
+                                <p>
+                                    Customize token refresh behavior and expiration handling.
+                                </p>
+                                <div class="code-block">
+                                    <button class="copy-button" aria-label="Copy token config">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                    <pre><code># Add to ~/.maximo-dev-tools/oidc-config.json
+{
+  "tokenRefresh": {
+    "autoRefresh": true,
+    "refreshBeforeExpiry": 300,  // seconds
+    "maxRetries": 3
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="advanced-topic">
+                            <summary class="advanced-topic-title">
+                                <span class="topic-icon">🌐</span>
+                                <span class="topic-text">Proxy Configuration</span>
+                            </summary>
+                            <div class="advanced-topic-content">
+                                <p>
+                                    Configure proxy settings for corporate networks.
+                                </p>
+                                <div class="code-block">
+                                    <button class="copy-button" aria-label="Copy proxy config">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                    <pre><code># Set environment variables
+export HTTP_PROXY=http://proxy.example.com:8080
+export HTTPS_PROXY=http://proxy.example.com:8080
+export NO_PROXY=localhost,127.0.0.1
+
+# Or add to VSCode settings.json
+{
+  "http.proxy": "http://proxy.example.com:8080",
+  "http.proxyStrictSSL": false
+}</code></pre>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section">
+                    <h2 class="section-title">Troubleshooting</h2>
+                    
+                    <div class="troubleshooting-list">
+                        <details class="troubleshooting-item">
+                            <summary class="troubleshooting-question">
+                                <span class="question-icon">❓</span>
+                                <span class="question-text">Authentication fails with "Invalid client credentials"</span>
+                            </summary>
+                            <div class="troubleshooting-answer">
+                                <p>This usually means the Client ID or Client Secret is incorrect. Try:</p>
+                                <ol>
+                                    <li>Verify credentials with your MAS administrator</li>
+                                    <li>Check for extra spaces or hidden characters</li>
+                                    <li>Re-run the setup: <code>./oidc.sh</code></li>
+                                    <li>Check the config file: <code>cat ~/.maximo-dev-tools/oidc-config.json</code></li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item">
+                            <summary class="troubleshooting-question">
+                                <span class="question-icon">❓</span>
+                                <span class="question-text">Cannot connect to MAS - SSL certificate error</span>
+                            </summary>
+                            <div class="troubleshooting-answer">
+                                <p>For self-signed certificates in development environments:</p>
+                                <ol>
+                                    <li>Add <code>"rejectUnauthorized": false</code> to your config</li>
+                                    <li>Or install the CA certificate in your system trust store</li>
+                                    <li>Restart VSCode after making changes</li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item">
+                            <summary class="troubleshooting-question">
+                                <span class="question-icon">❓</span>
+                                <span class="question-text">Token expires too quickly</span>
+                            </summary>
+                            <div class="troubleshooting-answer">
+                                <p>The extension should automatically refresh tokens. If not:</p>
+                                <ol>
+                                    <li>Check token refresh settings in config</li>
+                                    <li>Manually refresh: Command Palette → "Maximo: Refresh Token"</li>
+                                    <li>Check extension logs for errors</li>
+                                    <li>Contact your MAS admin about token expiration policies</li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item">
+                            <summary class="troubleshooting-question">
+                                <span class="question-icon">❓</span>
+                                <span class="question-text">OpenShift automatic setup fails</span>
+                            </summary>
+                            <div class="troubleshooting-answer">
+                                <p>If automatic credential retrieval fails:</p>
+                                <ol>
+                                    <li>Verify you're logged in: <code>oc whoami</code></li>
+                                    <li>Check you have access to the MAS namespace</li>
+                                    <li>Try specifying namespace: <code>./get-credentials.sh mas-inst1-core</code></li>
+                                    <li>Fall back to manual setup if needed</li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item">
+                            <summary class="troubleshooting-question">
+                                <span class="question-icon">❓</span>
+                                <span class="question-text">Configuration file not found</span>
+                            </summary>
+                            <div class="troubleshooting-answer">
+                                <p>If the extension can't find your configuration:</p>
+                                <ol>
+                                    <li>Check file exists: <code>ls -la ~/.maximo-dev-tools/</code></li>
+                                    <li>Verify permissions: <code>chmod 600 ~/.maximo-dev-tools/oidc-config.json</code></li>
+                                    <li>Re-run setup if file is missing</li>
+                                    <li>Check VSCode settings for custom config path</li>
+                                </ol>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="info-box info-box-yellow">
+                        <div class="info-icon">💡</div>
+                        <div class="info-content">
+                            <strong>Still having issues?</strong>
+                            <p>
+                                Check the extension logs: View → Output → "Maximo Dev Tools"<br>
+                                Or create an issue: <a href="https://github.com/ibm-mas/maf-local-dev-mode/issues">GitHub Issues</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="section section-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">OIDC Configured Successfully?</h2>
+                    <p class="cta-description">
+                        Great! Now you're ready to start developing with the extension.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="features.html" class="btn btn-primary">
+                            Explore Features
+                        </a>
+                        <a href="index.html#getting-started" class="btn btn-secondary">
+                            Getting Started Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Maximo Local Dev Mode</h3>
+                    <p class="footer-description">
+                        Streamline your Maximo application development with local configuration management and live preview.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Documentation</h4>
+                    <ul class="footer-links">
+                        <li><a href="install.html">Installation</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="oidc.html">OIDC Setup</a></li>
+                        <li><a href="manual.html">Manual Install</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" target="_blank" rel="noopener noreferrer">Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2026 IBM. Licensed under Apache 2.0.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

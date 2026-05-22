@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Features of Maximo Application Configuration - Local Dev Mode VSCode extension">
+    <title>Features - Maximo Local Dev Mode</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                950: '#0a0a0a',
+              },
+              blue: {
+                400: '#78a9ff',
+                500: '#4589ff',
+                600: '#0f62fe',
+              },
+              emerald: {
+                400: '#42be65',
+                500: '#24a148',
+              },
+            },
+            fontFamily: {
+              sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+              mono: ['IBM Plex Mono', 'monospace'],
+            },
+          },
+        },
+      }
+    </script>
+    
+    <!-- IBM Plex Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+</head>
+<body class="dark bg-slate-950 text-slate-100 font-sans antialiased">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-400">Skip to main content</a>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 transition-transform duration-300">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+          <a href="index.html" class="flex items-center gap-3 text-xl font-semibold hover:text-blue-400 transition-colors">
+            <span class="text-2xl">⬡</span>
+            <span>Maximo Local Dev</span>
+          </a>
+          
+          <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
+            <a href="index.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Home</a>
+            <a href="install.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Install</a>
+            <a href="features.html" class="nav-link text-blue-400 hover:text-blue-300 transition-colors font-medium" aria-current="page">Features</a>
+            <a href="manual.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Manual Install</a>
+            <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link text-slate-300 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </nav>
+          
+          <button class="menu-toggle md:hidden text-2xl text-slate-300 hover:text-blue-400 transition-colors" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <nav class="nav md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900 border-l border-slate-800 transform translate-x-full transition-transform duration-300 ease-in-out" role="navigation" aria-label="Mobile navigation">
+        <div class="flex flex-col gap-1 p-6 pt-20">
+          <a href="index.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Home</a>
+          <a href="install.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Install</a>
+          <a href="features.html" class="nav-link px-4 py-3 rounded-lg text-blue-400 bg-blue-500/10 font-medium">Features</a>
+          <a href="manual.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Manual Install</a>
+          <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="pt-16">
+        <!-- Page Header -->
+        <section class="relative py-20 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Features</h1>
+                    <p class="text-xl text-slate-300">Powerful tools to accelerate your Maximo application development</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Core Features</h2>
+                
+                <!-- MAS Authentication -->
+                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                    <div class="flex flex-col md:flex-row gap-6 mb-6">
+                        <div class="text-5xl">🔐</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">MAS Authentication with OAuth/OIDC</h3>
+                            <p class="text-lg text-slate-400">Seamless authentication to remote Maximo Application Suite environments</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="text-slate-300">
+                            Connect securely to remote MAS environments using industry-standard OAuth 2.0 and OpenID Connect protocols. 
+                            The extension handles token management, refresh, and secure storage automatically.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Automatic token refresh</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Secure credential storage</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Support for multiple environments</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">OpenShift integration</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                            <h4 class="text-lg font-semibold mb-4">Quick Setup</h4>
+                            <div class="bg-slate-900 rounded-lg border border-slate-700 overflow-hidden">
+                                <div class="flex items-center justify-between px-4 py-3 bg-slate-800/50 border-b border-slate-700">
+                                    <span class="text-sm font-mono text-slate-400">OIDC Setup</span>
+                                    <button class="copy-button px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded transition-colors" aria-label="Copy OIDC setup command">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div class="code-block p-4">
+                                    <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/oidc.sh | bash</code></pre>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-400 mt-3">
+                                Or use the interactive wizard: <a href="oidc.html" class="text-blue-400 hover:text-blue-300 transition-colors">OIDC Setup Guide</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Server -->
+                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                    <div class="flex flex-col md:flex-row gap-6 mb-6">
+                        <div class="text-5xl">🚀</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">Preview Server with Live Reload</h3>
+                            <p class="text-lg text-slate-400">See your changes instantly without redeploying</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="text-slate-300">
+                            Launch a local development server that serves your Maximo application with live reload. 
+                            Changes to XML configuration files are detected automatically and reflected in your browser 
+                            without manual refresh.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Hot module replacement</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">File watching</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Browser sync</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Error overlay</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                            <h4 class="text-lg font-semibold mb-4">Start Preview Server</h4>
+                            <div class="flex items-center gap-3 p-4 bg-slate-900 rounded-lg border border-slate-700">
+                                <kbd class="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+P</kbd>
+                                <span class="text-slate-500">→</span>
+                                <span class="text-slate-300 font-mono text-sm">Maximo: Start Preview Server</span>
+                            </div>
+                            <p class="text-sm text-slate-400 mt-3">
+                                Server starts on <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">http://localhost:3000</code> by default
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offline Cache -->
+                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                    <div class="flex flex-col md:flex-row gap-6 mb-6">
+                        <div class="text-5xl">💾</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">Offline Cache Support</h3>
+                            <p class="text-lg text-slate-400">Work without constant network connectivity</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="text-slate-300">
+                            The extension caches application metadata, object structures, and configuration data locally. 
+                            This enables you to continue development even when disconnected from the MAS environment, 
+                            with automatic synchronization when connectivity is restored.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Smart caching strategy</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Automatic sync on reconnect</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Cache invalidation</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-400 text-xl">✓</span>
+                                <span class="text-slate-300">Offline indicators</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+                            <div class="flex gap-4">
+                                <div class="text-2xl">💡</div>
+                                <div>
+                                    <strong class="text-blue-400">Cache Location:</strong>
+                                    <p class="text-slate-300 mt-2">Cache files are stored in <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">~/.maximo-dev-tools/cache/</code></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Core Features (Application Panel, XML Diff, Self-Signed Certs) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="text-xl font-semibold mb-3">Application Panel</h3>
+                        <p class="text-slate-400 mb-4">
+                            Visual overview of your Maximo application structure with tree view navigation and quick file access.
+                        </p>
+                    </div>
+
+                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="text-xl font-semibold mb-3">XML Diff Tools</h3>
+                        <p class="text-slate-400 mb-4">
+                            Compare and merge configuration changes with semantic XML comparison and three-way merge.
+                        </p>
+                    </div>
+
+                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🔒</div>
+                        <h3 class="text-xl font-semibold mb-3">Self-Signed Certificates</h3>
+                        <p class="text-slate-400 mb-4">
+                            Work with development environments using self-signed certificates with configurable trust settings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developer Experience -->
+        <section class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Developer Experience</h2>
+                <p class="text-slate-400 mb-12 text-lg">
+                    Features designed to make your development workflow smoother and more productive.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">⚡</div>
+                        <h3 class="text-lg font-semibold mb-3">IntelliSense</h3>
+                        <p class="text-slate-400 text-sm">
+                            Smart code completion for Maximo XML elements, attributes, and values.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-lg font-semibold mb-3">Go to Definition</h3>
+                        <p class="text-slate-400 text-sm">
+                            Jump directly to component definitions and controller implementations.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🔎</div>
+                        <h3 class="text-lg font-semibold mb-3">Find References</h3>
+                        <p class="text-slate-400 text-sm">
+                            Locate all usages of components and variables across your application.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">✏️</div>
+                        <h3 class="text-lg font-semibold mb-3">Rename Refactoring</h3>
+                        <p class="text-slate-400 text-sm">
+                            Safely rename components with automatic updates across all references.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">📝</div>
+                        <h3 class="text-lg font-semibold mb-3">Snippets</h3>
+                        <p class="text-slate-400 text-sm">
+                            Pre-built code snippets for common Maximo patterns and components.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🐛</div>
+                        <h3 class="text-lg font-semibold mb-3">Diagnostics</h3>
+                        <p class="text-slate-400 text-sm">
+                            Real-time validation with helpful error messages and suggestions.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">🎨</div>
+                        <h3 class="text-lg font-semibold mb-3">Syntax Highlighting</h3>
+                        <p class="text-slate-400 text-sm">
+                            Enhanced syntax highlighting with semantic coloring for better readability.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
+                        <div class="text-4xl mb-4">📋</div>
+                        <h3 class="text-lg font-semibold mb-3">Hover Information</h3>
+                        <p class="text-slate-400 text-sm">
+                            Detailed documentation and type information on hover for elements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Integration -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Workflow Integration</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="text-4xl">🔄</div>
+                            <h3 class="text-xl font-semibold">Sync with Remote</h3>
+                        </div>
+                        <p class="text-slate-400 mb-6">
+                            Synchronize your local configuration with the remote MAS environment. 
+                            Pull changes from remote, push local changes, or perform two-way sync.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Pull from Remote</code>
+                            </div>
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Push to Remote</code>
+                            </div>
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Sync Configuration</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="text-4xl">📦</div>
+                            <h3 class="text-xl font-semibold">Export & Import</h3>
+                        </div>
+                        <p class="text-slate-400 mb-6">
+                            Export your application configuration as a portable package. Import 
+                            configurations from other environments or share with team members.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Export Configuration</code>
+                            </div>
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Import Configuration</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="text-4xl">🧪</div>
+                            <h3 class="text-xl font-semibold">Validation & Testing</h3>
+                        </div>
+                        <p class="text-slate-400 mb-6">
+                            Validate your configuration against Maximo schemas and best practices. 
+                            Run automated tests to ensure your changes don't break functionality.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Validate Configuration</code>
+                            </div>
+                            <div class="px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                                <code class="text-sm font-mono text-slate-300">Maximo: Run Tests</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Command Reference -->
+        <section class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Command Reference</h2>
+                <p class="text-slate-400 mb-12 text-lg">
+                    Quick reference for all available commands. Access via Command Palette (<kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+P</kbd>).
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">Server Management</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Start Preview Server</code>
+                                <span class="text-xs text-slate-500">Launch local development server</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Stop Preview Server</code>
+                                <span class="text-xs text-slate-500">Stop the running server</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Restart Preview Server</code>
+                                <span class="text-xs text-slate-500">Restart server with new configuration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">Configuration</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Sync Configuration</code>
+                                <span class="text-xs text-slate-500">Two-way sync with remote</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Pull from Remote</code>
+                                <span class="text-xs text-slate-500">Download remote configuration</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Compare with Remote</code>
+                                <span class="text-xs text-slate-500">View differences</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">Authentication</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Configure OIDC</code>
+                                <span class="text-xs text-slate-500">Set up OAuth/OIDC authentication</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Refresh Token</code>
+                                <span class="text-xs text-slate-500">Manually refresh auth token</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Clear Credentials</code>
+                                <span class="text-xs text-slate-500">Remove stored credentials</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">Development</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Validate Configuration</code>
+                                <span class="text-xs text-slate-500">Check for errors</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Show Application Panel</code>
+                                <span class="text-xs text-slate-500">Open structure view</span>
+                            </div>
+                            <div class="bg-slate-900 rounded-lg p-4 border border-slate-800">
+                                <code class="text-sm font-mono text-emerald-400 block mb-1">Maximo: Clear Cache</code>
+                                <span class="text-xs text-slate-500">Clear offline cache</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Started CTA -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center bg-gradient-to-br from-blue-600/20 to-slate-900 rounded-2xl p-12 border border-blue-500/30">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+                    <p class="text-slate-300 mb-8 text-lg">
+                        Install the extension and start developing with these powerful features today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="install.html" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
+                            Install Now
+                        </a>
+                        <a href="oidc.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-xl transition-all duration-300">
+                            Configure OIDC
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Maximo Local Dev Mode</h3>
+                    <p class="text-slate-400 text-sm">
+                        Streamline your Maximo application development with local configuration management and live preview.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Documentation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="install.html" class="text-slate-400 hover:text-blue-400 transition-colors">Installation</a></li>
+                        <li><a href="features.html" class="text-slate-400 hover:text-blue-400 transition-colors">Features</a></li>
+                        <li><a href="manual.html" class="text-slate-400 hover:text-blue-400 transition-colors">Manual Install</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Community</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/blob/main/CONTRIBUTING.md" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8">
+                <p class="text-center text-slate-500 text-sm">
+                    © 2026 IBM. Licensed under Apache 2.0.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manual installation instructions for Maximo Application Configuration - Local Dev Mode">
+    <title>Manual Installation - Maximo Local Dev Mode</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                950: '#0a0a0a',
+              },
+              blue: {
+                400: '#78a9ff',
+                500: '#4589ff',
+                600: '#0f62fe',
+              },
+              emerald: {
+                400: '#42be65',
+                500: '#24a148',
+              },
+            },
+            fontFamily: {
+              sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+              mono: ['IBM Plex Mono', 'monospace'],
+            },
+          },
+        },
+      }
+    </script>
+    
+    <!-- IBM Plex Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+</head>
+<body class="dark bg-slate-950 text-slate-100 font-sans antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-400">Skip to main content</a>
+
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 transition-transform duration-300">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+          <a href="index.html" class="flex items-center gap-3 text-xl font-semibold hover:text-blue-400 transition-colors">
+            <span class="text-2xl">⬡</span>
+            <span>Maximo Local Dev</span>
+          </a>
+          
+          <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
+            <a href="index.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Home</a>
+            <a href="install.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Install</a>
+            <a href="features.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Features</a>
+            <a href="manual.html" class="nav-link text-blue-400 hover:text-blue-300 transition-colors font-medium" aria-current="page">Manual Install</a>
+            <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link text-slate-300 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </nav>
+          
+          <button class="menu-toggle md:hidden text-2xl text-slate-300 hover:text-blue-400 transition-colors" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <nav class="nav md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900 border-l border-slate-800 transform translate-x-full transition-transform duration-300 ease-in-out" role="navigation" aria-label="Mobile navigation">
+        <div class="flex flex-col gap-1 p-6 pt-20">
+          <a href="index.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Home</a>
+          <a href="install.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Install</a>
+          <a href="features.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Features</a>
+          <a href="manual.html" class="nav-link px-4 py-3 rounded-lg text-blue-400 bg-blue-500/10 font-medium">Manual Install</a>
+          <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content" class="pt-16">
+        <section class="relative py-20 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Manual Installation</h1>
+                    <p class="text-xl text-slate-300">Step-by-step guide for manual VSIX installation</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">When to Use Manual Installation</h2>
+                    <p class="text-slate-400 mb-8 text-lg">Manual installation is recommended when automated installation fails or when you need more control over the process.</p>
+
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+                        <div class="flex gap-4">
+                            <div class="text-2xl">💡</div>
+                            <div>
+                                <strong class="text-blue-400 block mb-2">Prefer automated installation?</strong>
+                                <p class="text-slate-300">
+                                    If possible, use the <a href="install.html" class="text-blue-400 hover:text-blue-300 transition-colors underline">automated installer</a> for a faster, easier setup.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Method 1: Install via VSCode UI</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">1</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Download the VSIX File</h3>
+                                <p class="text-slate-400 mb-6">Visit GitHub releases and download the latest .vsix file:</p>
+                                <a href="https://github.com/ibm-mas/maf-local-dev-mode/releases/latest" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105" target="_blank" rel="noopener noreferrer">
+                                    Download Latest Release
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">2</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Open VSCode Extensions</h3>
+                                <p class="text-slate-400">
+                                    Press <kbd class="px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+X</kbd> 
+                                    (or <kbd class="px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Cmd+Shift+X</kbd> on Mac)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">3</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Install from VSIX</h3>
+                                <p class="text-slate-400">Click "..." menu → "Install from VSIX..." → Select downloaded file</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">4</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Verify Installation</h3>
+                                <p class="text-slate-400">Search for "Maximo Developer Configuration Tools" in Extensions panel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">Method 2: Install via Command Line</h2>
+                    
+                    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                        <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                            <span class="text-sm font-mono text-slate-400">Command Line Installation</span>
+                            <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy install command">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                        </div>
+                        <div class="code-block p-6">
+                            <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">code --install-extension path/to/maximo-developer-configuration-tools.vsix</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gradient-to-br from-blue-600/20 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Installation Complete?</h2>
+                    <p class="text-slate-300 mb-8 text-lg">Now configure authentication and start developing!</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="oidc.html" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">Configure OIDC</a>
+                        <a href="features.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-xl transition-all duration-300">Explore Features</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Maximo Local Dev Mode</h3>
+                    <p class="text-slate-400 text-sm">Streamline your Maximo application development with local configuration management and live preview.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Documentation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="install.html" class="text-slate-400 hover:text-blue-400 transition-colors">Installation</a></li>
+                        <li><a href="features.html" class="text-slate-400 hover:text-blue-400 transition-colors">Features</a></li>
+                        <li><a href="manual.html" class="text-slate-400 hover:text-blue-400 transition-colors">Manual Install</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Community</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/blob/main/CONTRIBUTING.md" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8">
+                <p class="text-center text-slate-500 text-sm">© 2026 IBM. Licensed under Apache 2.0.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

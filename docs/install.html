@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Installation guide for Maximo Application Configuration - Local Dev Mode VSCode extension">
+    <title>Installation - Maximo Local Dev Mode</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                950: '#0a0a0a',
+              },
+              blue: {
+                400: '#78a9ff',
+                500: '#4589ff',
+                600: '#0f62fe',
+              },
+              emerald: {
+                400: '#42be65',
+                500: '#24a148',
+              },
+              amber: {
+                400: '#fddc69',
+                500: '#f1c21b',
+              },
+            },
+            fontFamily: {
+              sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+              mono: ['IBM Plex Mono', 'monospace'],
+            },
+          },
+        },
+      }
+    </script>
+    
+    <!-- IBM Plex Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      details summary {
+        cursor: pointer;
+        user-select: none;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
+</head>
+<body class="dark bg-slate-950 text-slate-100 font-sans antialiased">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-400">Skip to main content</a>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 transition-transform duration-300">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+          <a href="index.html" class="flex items-center gap-3 text-xl font-semibold hover:text-blue-400 transition-colors">
+            <span class="text-2xl">⬡</span>
+            <span>Maximo Local Dev</span>
+          </a>
+          
+          <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
+            <a href="index.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Home</a>
+            <a href="install.html" class="nav-link text-blue-400 hover:text-blue-300 transition-colors font-medium" aria-current="page">Install</a>
+            <a href="features.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Features</a>
+            <a href="manual.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Manual Install</a>
+            <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link text-slate-300 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </nav>
+          
+          <button class="menu-toggle md:hidden text-2xl text-slate-300 hover:text-blue-400 transition-colors" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <nav class="nav md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900 border-l border-slate-800 transform translate-x-full transition-transform duration-300 ease-in-out" role="navigation" aria-label="Mobile navigation">
+        <div class="flex flex-col gap-1 p-6 pt-20">
+          <a href="index.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Home</a>
+          <a href="install.html" class="nav-link px-4 py-3 rounded-lg text-blue-400 bg-blue-500/10 font-medium">Install</a>
+          <a href="features.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Features</a>
+          <a href="manual.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Manual Install</a>
+          <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="pt-16">
+        <!-- Page Header -->
+        <section class="relative py-20 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Installation Guide</h1>
+                    <p class="text-xl text-slate-300">Get up and running in minutes with our automated installer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Install -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Quick Install</h2>
+                    <p class="text-slate-400 mb-8 text-lg">
+                        The fastest way to install the Maximo Developer Configuration Tools extension.
+                        Choose your editor and run the one-line command to install automatically.
+                    </p>
+
+                    <!-- Bob IDE Installation -->
+                    <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-lg font-semibold">For IBM Bob IDE</span>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm font-semibold rounded-full border border-blue-500/30">Bob IDE</span>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                            <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                <span class="text-sm font-mono text-slate-400">Installation Command</span>
+                                <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy Bob IDE installation command">
+                                    <span class="copy-icon">📋</span>
+                                    <span class="copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="code-block p-6">
+                                <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | bash -s bob</code></pre>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-400 mt-4">
+                            Installs directly into IBM Bob IDE without prompts. Requires the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">bobide</code> CLI to be available in your PATH.
+                        </p>
+                    </div>
+
+                    <!-- VSCode Installation -->
+                    <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-lg font-semibold">For VSCode</span>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm font-semibold rounded-full border border-blue-500/30">VSCode</span>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                            <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                <span class="text-sm font-mono text-slate-400">Installation Command</span>
+                                <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy VSCode installation command">
+                                    <span class="copy-icon">📋</span>
+                                    <span class="copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="code-block p-6">
+                                <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | bash -s vscode</code></pre>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-400 mt-4">
+                            Installs directly into VSCode without prompts. Requires the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">code</code> CLI to be available in your PATH.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Installation -->
+                    <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-lg font-semibold">Interactive Mode</span>
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-500/30">Auto-Detect</span>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                            <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                <span class="text-sm font-mono text-slate-400">Installation Command</span>
+                                <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy interactive installation command">
+                                    <span class="copy-icon">📋</span>
+                                    <span class="copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="code-block p-6">
+                                <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | bash</code></pre>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-400 mt-4">
+                            Automatically detects available editors and prompts you to choose if multiple are found.
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+                        <div class="flex gap-4">
+                            <div class="text-2xl">ℹ️</div>
+                            <div>
+                                <strong class="text-blue-400 block mb-2">What these commands do:</strong>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400 mt-1">•</span>
+                                        <span>Check for prerequisites (editor CLI, Node.js)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400 mt-1">•</span>
+                                        <span>Download the latest .vsix from GitHub releases</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400 mt-1">•</span>
+                                        <span>Install the extension automatically into your chosen editor</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400 mt-1">•</span>
+                                        <span>Provide verification steps and next actions</span>
+                                    </li>
+                                </ul>
+                                <div class="mt-4 pt-4 border-t border-blue-500/30">
+                                    <p class="text-sm text-slate-400">
+                                        <strong class="text-blue-400">Note:</strong> The <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">bash -s bob</code> or <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">bash -s vscode</code> syntax passes the editor choice as a parameter to the installation script, enabling non-interactive installation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prerequisites -->
+        <section class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Prerequisites</h2>
+                    <p class="text-slate-400 mb-12 text-lg">
+                        Before installing, ensure you have the following requirements met:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">💻</div>
+                            <h3 class="text-xl font-semibold mb-2">Code Editor</h3>
+                            <p class="text-blue-400 font-semibold mb-4">IBM Bob IDE or VSCode</p>
+                            <p class="text-slate-400 mb-6">
+                                The extension works with IBM Bob IDE (<code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">bobide</code> CLI) or VSCode (<code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">code</code> CLI). At least one must be installed with its CLI available in your PATH.
+                            </p>
+                            <a href="https://code.visualstudio.com/download" class="inline-flex items-center justify-center px-4 py-2 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300 text-sm" target="_blank" rel="noopener noreferrer">
+                                Download VSCode
+                            </a>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">🟢</div>
+                            <h3 class="text-xl font-semibold mb-2">Node.js</h3>
+                            <p class="text-blue-400 font-semibold mb-4">Version 20.0.0 or higher</p>
+                            <p class="text-slate-400 mb-6">
+                                Required for running the preview server and development tools.
+                            </p>
+                            <a href="https://nodejs.org/" class="inline-flex items-center justify-center px-4 py-2 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300 text-sm" target="_blank" rel="noopener noreferrer">
+                                Download Node.js
+                            </a>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">🔧</div>
+                            <h3 class="text-xl font-semibold mb-2">Git</h3>
+                            <p class="text-blue-400 font-semibold mb-4">Any recent version</p>
+                            <p class="text-slate-400 mb-6">
+                                Optional but recommended for version control and cloning repositories.
+                            </p>
+                            <a href="https://git-scm.com/downloads" class="inline-flex items-center justify-center px-4 py-2 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300 text-sm" target="_blank" rel="noopener noreferrer">
+                                Download Git
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step-by-Step Installation -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Step-by-Step Installation</h2>
+                    <p class="text-slate-400 mb-12 text-lg">
+                        Prefer to install manually? Follow these detailed steps.
+                    </p>
+
+                    <div class="space-y-6">
+                        <!-- Step 1 -->
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">1</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Download the Installation Script</h3>
+                                <p class="text-slate-400 mb-6">
+                                    Download the installer script to your local machine:
+                                </p>
+                                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                    <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                        <span class="text-sm font-mono text-slate-400">Download Script</span>
+                                        <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy download command">
+                                            <span class="copy-icon">📋</span>
+                                            <span class="copy-text">Copy</span>
+                                        </button>
+                                    </div>
+                                    <div class="code-block p-6">
+                                        <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh -o install.sh
+chmod +x install.sh</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">2</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Run the Installer</h3>
+                                <p class="text-slate-400 mb-6">
+                                    Execute the installation script. You can specify your editor or let it auto-detect:
+                                </p>
+                                <div class="space-y-3 mb-4">
+                                    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                        <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                            <span class="text-sm font-mono text-slate-400">For Bob IDE</span>
+                                            <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy Bob IDE command">
+                                                <span class="copy-icon">📋</span>
+                                                <span class="copy-text">Copy</span>
+                                            </button>
+                                        </div>
+                                        <div class="code-block p-6">
+                                            <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">./install.sh bob</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                        <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                            <span class="text-sm font-mono text-slate-400">For VSCode</span>
+                                            <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy VSCode command">
+                                                <span class="copy-icon">📋</span>
+                                                <span class="copy-text">Copy</span>
+                                            </button>
+                                        </div>
+                                        <div class="code-block p-6">
+                                            <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">./install.sh vscode</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                        <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                            <span class="text-sm font-mono text-slate-400">Interactive (auto-detect)</span>
+                                            <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy interactive command">
+                                                <span class="copy-icon">📋</span>
+                                                <span class="copy-text">Copy</span>
+                                            </button>
+                                        </div>
+                                        <div class="code-block p-6">
+                                            <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">./install.sh</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-slate-400">
+                                    The script will check prerequisites, download the latest release, and install the extension into your chosen editor.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">3</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Verify Installation</h3>
+                                <p class="text-slate-400 mb-6">
+                                    Restart VSCode and verify the extension is installed:
+                                </p>
+                                <ol class="space-y-3 text-slate-300">
+                                    <li class="flex items-start gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-sm">1</span>
+                                        <span>Open VSCode</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-sm">2</span>
+                                        <span>Press <kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+X</kbd> (or <kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Cmd+Shift+X</kbd> on Mac)</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-sm">3</span>
+                                        <span>Search for "Maximo Developer Configuration Tools"</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-sm">4</span>
+                                        <span>Verify it shows as installed</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">4</div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold mb-4">Configure Authentication</h3>
+                                <p class="text-slate-400 mb-6">
+                                    Set up authentication for your Maximo environment:
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-3 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                                        <span class="text-emerald-400 text-xl">✓</span>
+                                        <div>
+                                            <strong class="text-slate-200">Local Manage:</strong>
+                                            <span class="text-slate-400"> No additional setup required</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                                        <span class="text-blue-400 text-xl">→</span>
+                                        <div>
+                                            <strong class="text-slate-200">Remote MAS:</strong>
+                                            <span class="text-slate-400"> Follow the </span>
+                                            <a href="oidc.html" class="text-blue-400 hover:text-blue-300 transition-colors">OIDC Setup Guide</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alternative Methods -->
+        <section class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Alternative Installation Methods</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- VSCode Marketplace -->
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">🏪</div>
+                            <h3 class="text-xl font-semibold mb-4">VSCode Marketplace</h3>
+                            <p class="text-slate-400 mb-6">
+                                Install directly from the VSCode Extensions Marketplace (coming soon).
+                            </p>
+                            <div class="space-y-2 text-sm text-slate-300 mb-6">
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">1.</span>
+                                    <span>Open VSCode</span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">2.</span>
+                                    <span>Go to Extensions (<kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded font-mono text-xs">Ctrl+Shift+X</kbd>)</span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">3.</span>
+                                    <span>Search for "Maximo Developer Configuration Tools"</span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">4.</span>
+                                    <span>Click Install</span>
+                                </p>
+                            </div>
+                            <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-sm font-semibold rounded-full border border-amber-500/30">Coming Soon</span>
+                        </div>
+
+                        <!-- Manual VSIX -->
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">📦</div>
+                            <h3 class="text-xl font-semibold mb-4">Manual VSIX Install</h3>
+                            <p class="text-slate-400 mb-6">
+                                Download and install the .vsix file manually.
+                            </p>
+                            <div class="space-y-2 text-sm text-slate-300 mb-6">
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">1.</span>
+                                    <span>Download .vsix from <a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-blue-400 hover:text-blue-300 transition-colors">GitHub Releases</a></span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">2.</span>
+                                    <span>Open VSCode</span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">3.</span>
+                                    <span>Extensions → "..." menu → "Install from VSIX..."</span>
+                                </p>
+                                <p class="flex items-start gap-2">
+                                    <span class="text-blue-400 mt-1">4.</span>
+                                    <span>Select the downloaded .vsix file</span>
+                                </p>
+                            </div>
+                            <a href="manual.html" class="inline-flex items-center justify-center px-4 py-2 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300 text-sm">
+                                Detailed Instructions
+                            </a>
+                        </div>
+
+                        <!-- Command Line -->
+                        <div class="bg-slate-900 rounded-xl p-8 border border-slate-800">
+                            <div class="text-5xl mb-4">⌨️</div>
+                            <h3 class="text-xl font-semibold mb-4">Command Line Install</h3>
+                            <p class="text-slate-400 mb-6">
+                                Install using the VSCode CLI directly.
+                            </p>
+                            <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden mb-4">
+                                <div class="flex items-center justify-between px-4 py-3 bg-slate-900/50 border-b border-slate-700">
+                                    <span class="text-xs font-mono text-slate-400">CLI Install</span>
+                                    <button class="copy-button px-3 py-1 text-xs bg-slate-700 hover:bg-slate-600 text-slate-300 rounded transition-colors" aria-label="Copy CLI command">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div class="code-block p-4">
+                                    <pre class="overflow-x-auto"><code class="font-mono text-xs text-emerald-400">code --install-extension maximo-developer-configuration-tools.vsix</code></pre>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400">
+                                Replace the filename with your downloaded .vsix file path.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Troubleshooting</h2>
+                    
+                    <div class="space-y-4">
+                        <details class="troubleshooting-item bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                            <summary class="flex items-center gap-4 p-6 hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                <span class="text-2xl">❓</span>
+                                <span class="flex-1 font-semibold">Installation script fails with "code command not found"</span>
+                                <span class="text-slate-500">▼</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-slate-300 space-y-4">
+                                <p>The VSCode CLI is not in your PATH. To fix this:</p>
+                                <ol class="space-y-2 ml-4">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">1.</span>
+                                        <span>Open VSCode</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">2.</span>
+                                        <span>Press <kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+P</kbd> (or <kbd class="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Cmd+Shift+P</kbd> on Mac)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">3.</span>
+                                        <span>Type "Shell Command: Install 'code' command in PATH"</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">4.</span>
+                                        <span>Select and run the command</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">5.</span>
+                                        <span>Restart your terminal and try again</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                            <summary class="flex items-center gap-4 p-6 hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                <span class="text-2xl">❓</span>
+                                <span class="flex-1 font-semibold">Node.js version is too old</span>
+                                <span class="text-slate-500">▼</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-slate-300 space-y-4">
+                                <p>The extension requires Node.js 20.0.0 or higher. Update Node.js:</p>
+                                <ul class="space-y-2 ml-4">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span><strong>Using nvm:</strong> <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">nvm install 20 && nvm use 20</code></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span><strong>Direct download:</strong> Visit <a href="https://nodejs.org/" class="text-blue-400 hover:text-blue-300 transition-colors" target="_blank" rel="noopener noreferrer">nodejs.org</a></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span><strong>Package manager:</strong> Use your system's package manager to update</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                            <summary class="flex items-center gap-4 p-6 hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                <span class="text-2xl">❓</span>
+                                <span class="flex-1 font-semibold">Extension installed but not showing in VSCode</span>
+                                <span class="text-slate-500">▼</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-slate-300 space-y-4">
+                                <p>Try these steps:</p>
+                                <ol class="space-y-2 ml-4">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">1.</span>
+                                        <span>Completely quit and restart VSCode (not just reload window)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">2.</span>
+                                        <span>Check if the extension is enabled: Extensions panel → Installed → Enable</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">3.</span>
+                                        <span>Check the Output panel (View → Output) for any error messages</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">4.</span>
+                                        <span>Try reinstalling: Uninstall the extension and run the installer again</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                            <summary class="flex items-center gap-4 p-6 hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                <span class="text-2xl">❓</span>
+                                <span class="flex-1 font-semibold">Cannot download from GitHub releases</span>
+                                <span class="text-slate-500">▼</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-slate-300 space-y-4">
+                                <p>If you're behind a corporate firewall or proxy:</p>
+                                <ol class="space-y-2 ml-4">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">1.</span>
+                                        <span>Download the .vsix file manually from <a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-blue-400 hover:text-blue-300 transition-colors" target="_blank" rel="noopener noreferrer">GitHub Releases</a></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">2.</span>
+                                        <span>Follow the <a href="manual.html" class="text-blue-400 hover:text-blue-300 transition-colors">Manual Installation</a> instructions</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-400">3.</span>
+                                        <span>Or configure your proxy settings and try again</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="troubleshooting-item bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                            <summary class="flex items-center gap-4 p-6 hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                <span class="text-2xl">❓</span>
+                                <span class="flex-1 font-semibold">Permission denied errors during installation</span>
+                                <span class="text-slate-500">▼</span>
+                            </summary>
+                            <div class="px-6 pb-6 text-slate-300 space-y-4">
+                                <p>This usually happens on Linux/Mac. Try:</p>
+                                <ul class="space-y-2 ml-4">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span>Make sure you have write permissions to VSCode extensions directory</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span>Don't use <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">sudo</code> with the installer (it should run as your user)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span>Check file permissions: <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">ls -la ~/.vscode/extensions/</code></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-400">•</span>
+                                        <span>If needed, fix permissions: <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">chmod -R u+w ~/.vscode/extensions/</code></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6 mt-8">
+                        <div class="flex gap-4">
+                            <div class="text-2xl">💡</div>
+                            <div>
+                                <strong class="text-amber-400 block mb-2">Still having issues?</strong>
+                                <p class="text-slate-300">
+                                    Check our <a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-blue-400 hover:text-blue-300 transition-colors">GitHub Issues</a> 
+                                    or create a new issue with details about your problem. Include your OS, VSCode version, 
+                                    and any error messages you're seeing.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="py-20 bg-gradient-to-br from-blue-600/20 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Installation Complete?</h2>
+                    <p class="text-slate-300 mb-8 text-lg">
+                        Great! Now let's configure authentication and explore the features.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="oidc.html" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
+                            Set Up OIDC Authentication
+                        </a>
+                        <a href="features.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-xl transition-all duration-300">
+                            Explore Features
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Maximo Local Dev Mode</h3>
+                    <p class="text-slate-400 text-sm">
+                        Streamline your Maximo application development with local configuration management and live preview.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Documentation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="install.html" class="text-slate-400 hover:text-blue-400 transition-colors">Installation</a></li>
+                        <li><a href="features.html" class="text-slate-400 hover:text-blue-400 transition-colors">Features</a></li>
+                        <li><a href="manual.html" class="text-slate-400 hover:text-blue-400 transition-colors">Manual Install</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-slate-300">Community</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+
+ class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8">
+                <p class="text-center text-slate-500 text-sm">
+                    © 2026 IBM. Licensed under Apache 2.0.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
