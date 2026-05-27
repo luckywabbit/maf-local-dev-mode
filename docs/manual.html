@@ -120,7 +120,7 @@
         <section class="py-20 bg-slate-900/50">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Method 1: Install via VSCode UI</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Method 1: Install via UI (Bob IDE / VSCode)</h2>
                     
                     <div class="space-y-6">
                         <div class="step-card flex gap-6 bg-slate-900 rounded-xl p-8 border border-slate-800">
@@ -141,9 +141,9 @@
                                 <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">2</div>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-semibold mb-4">Open VSCode Extensions</h3>
+                                <h3 class="text-2xl font-semibold mb-4">Open Extensions Panel</h3>
                                 <p class="text-slate-400">
-                                    Press <kbd class="px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+X</kbd> 
+                                    Press <kbd class="px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Ctrl+Shift+X</kbd>
                                     (or <kbd class="px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm font-mono">Cmd+Shift+X</kbd> on Mac)
                                 </p>
                             </div>
@@ -176,18 +176,39 @@
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-8">Method 2: Install via Command Line</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-12">Method 2: Install via Command Line</h2>
                     
-                    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                        <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
-                            <span class="text-sm font-mono text-slate-400">Command Line Installation</span>
-                            <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy install command">
-                                <span class="copy-icon">📋</span>
-                                <span class="copy-text">Copy</span>
-                            </button>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">Bob IDE</h3>
+                            <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                    <span class="text-sm font-mono text-slate-400">Command Line Installation</span>
+                                    <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy install command">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div class="code-block p-6">
+                                    <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">bobide --install-extension path/to/maximo-developer-configuration-tools.vsix</code></pre>
+                                </div>
+                            </div>
                         </div>
-                        <div class="code-block p-6">
-                            <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">code --install-extension path/to/maximo-developer-configuration-tools.vsix</code></pre>
+
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">VSCode</h3>
+                            <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                    <span class="text-sm font-mono text-slate-400">Command Line Installation</span>
+                                    <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy install command">
+                                        <span class="copy-icon">📋</span>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div class="code-block p-6">
+                                    <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">code --install-extension path/to/maximo-developer-configuration-tools.vsix</code></pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
