@@ -225,6 +225,66 @@
             </div>
         </section>
 
+        <!-- Coding Assistant Method -->
+        <section class="py-20 bg-gradient-to-br from-emerald-600/10 to-slate-950">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-8">
+                        <div class="flex gap-4 items-start">
+                            <div class="text-4xl">🤖</div>
+                            <div class="flex-1">
+                                <h2 class="text-2xl font-bold mb-4 text-emerald-400">Easiest Method: Use Your Coding Assistant!</h2>
+                                <p class="text-slate-300 mb-6 text-lg">
+                                    Having trouble with the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">code</code> command not being in your PATH?
+                                    <strong class="text-emerald-400">Simply paste the installation command into your coding assistant</strong>
+                                    (VSCode Copilot, GitHub Copilot Chat, Bob IDE, or similar AI assistants).
+                                </p>
+                                
+                                <div class="bg-slate-900 rounded-xl p-6 border border-slate-700 mb-6">
+                                    <h3 class="text-lg font-semibold mb-4 text-slate-200">Why This Works:</h3>
+                                    <ul class="space-y-3 text-slate-300">
+                                        <li class="flex items-start gap-3">
+                                            <span class="text-emerald-400 text-xl flex-shrink-0">✓</span>
+                                            <span>Your coding assistant has access to the editor's internal commands</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="text-emerald-400 text-xl flex-shrink-0">✓</span>
+                                            <span>No need to manually install the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">code</code> command in PATH</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="text-emerald-400 text-xl flex-shrink-0">✓</span>
+                                            <span>Works even if you're new to command-line tools</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="text-emerald-400 text-xl flex-shrink-0">✓</span>
+                                            <span>The assistant can detect and use the editor's full application path</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                                    <div class="flex items-center justify-between px-6 py-4 bg-slate-900/50 border-b border-slate-700">
+                                        <span class="text-sm font-mono text-slate-400">Copy and paste this into your coding assistant</span>
+                                        <button class="copy-button px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors" aria-label="Copy command for coding assistant">
+                                            <span class="copy-icon">📋</span>
+                                            <span class="copy-text">Copy</span>
+                                        </button>
+                                    </div>
+                                    <div class="code-block p-6">
+                                        <pre class="overflow-x-auto"><code class="font-mono text-sm text-emerald-400">curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | bash -s vscode</code></pre>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-sm text-slate-400 mt-4">
+                                    <strong class="text-emerald-400">For Bob IDE users:</strong> Replace <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">vscode</code> with <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">bobide</code> in the command above.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Prerequisites -->
         <section class="py-20 bg-slate-900/50">
             <div class="container mx-auto px-6">
@@ -537,7 +597,24 @@ chmod +x install.sh</code></pre>
                                 <span class="text-slate-500">▼</span>
                             </summary>
                             <div class="px-6 pb-6 text-slate-300 space-y-4">
-                                <p>The VSCode CLI is not in your PATH. To fix this:</p>
+                                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mb-4">
+                                    <div class="flex gap-3 items-start">
+                                        <span class="text-2xl">🤖</span>
+                                        <div>
+                                            <strong class="text-emerald-400 block mb-2">Easiest Solution: Use Your Coding Assistant!</strong>
+                                            <p class="text-slate-300 mb-3">
+                                                Simply paste the installation command into your coding assistant (VSCode Copilot, GitHub Copilot Chat, Bob IDE, or similar).
+                                                The assistant has access to the editor's internal commands and can install the extension without needing the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">code</code> command in your PATH.
+                                            </p>
+                                            <p class="text-sm text-slate-400">
+                                                See the <a href="#main-content" class="text-emerald-400 hover:text-emerald-300 transition-colors" onclick="document.querySelector('.py-20.bg-gradient-to-br.from-emerald-600\\/10').scrollIntoView({behavior: 'smooth'})">Coding Assistant section above</a> for details.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="font-semibold text-slate-200">Alternative: Manually install the <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-xs">code</code> command</p>
+                                <p>If you prefer to fix the PATH issue manually:</p>
                                 <ol class="space-y-2 ml-4">
                                     <li class="flex items-start gap-2">
                                         <span class="text-blue-400">1.</span>

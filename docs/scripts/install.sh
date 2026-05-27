@@ -98,6 +98,67 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Detect VSCode in integrated terminal and use fallback path
+detect_vscode_fallback() {
+    # Check if running in VSCode integrated terminal
+    if [ -n "$VSCODE_GIT_IPC_HANDLE" ] || [ -n "$VSCODE_IPC_HOOK" ] || [ "$TERM_PROGRAM" = "vscode" ]; then
+        print_info "Detected VSCode integrated terminal, checking for VSCode installation..."
+        
+        # Try common VSCode installation paths
+        local vscode_paths=(
+            "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"  # macOS
+            "/usr/share/code/bin/code"  # Linux
+            "/usr/bin/code"  # Linux alternative
+            "$HOME/.vscode/extensions/bin/code"  # User installation
+        )
+        
+        for vscode_path in "${vscode_paths[@]}"; do
+            if [ -x "$vscode_path" ]; then
+                EDITOR_CLI="$vscode_path"
+                EDITOR_NAME="VSCode"
+                local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1)
+                print_success "Found VSCode at: $vscode_path"
+                if [ -n "$editor_version" ]; then
+                    print_success "VSCode version: $editor_version"
+                fi
+                return 0
+            fi
+        done
+    fi
+    return 1
+}
+
+# Detect Bob IDE in integrated terminal and use fallback path
+detect_bobide_fallback() {
+    # Check if running in Bob IDE integrated terminal
+    # Bob IDE is based on VSCode, so it may have similar environment variables
+    if [ -n "$VSCODE_GIT_IPC_HANDLE" ] || [ -n "$VSCODE_IPC_HOOK" ] || [ "$TERM_PROGRAM" = "vscode" ]; then
+        print_info "Checking for Bob IDE installation..."
+        
+        # Try common Bob IDE installation paths
+        local bobide_paths=(
+            "/Applications/Bob.app/Contents/Resources/app/bin/bobide"  # macOS
+            "/usr/share/bobide/bin/bobide"  # Linux
+            "/usr/bin/bobide"  # Linux alternative
+            "$HOME/.bobide/bin/bobide"  # User installation
+        )
+        
+        for bobide_path in "${bobide_paths[@]}"; do
+            if [ -x "$bobide_path" ]; then
+                EDITOR_CLI="$bobide_path"
+                EDITOR_NAME="BobIDE"
+                local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1)
+                print_success "Found Bob IDE at: $bobide_path"
+                if [ -n "$editor_version" ]; then
+                    print_success "Bob IDE version: $editor_version"
+                fi
+                return 0
+            fi
+        done
+    fi
+    return 1
+}
+
 # Select editor CLI
 select_editor() {
     local editor_param="$1"
@@ -119,13 +180,19 @@ select_editor() {
                 if command_exists bobide; then
                     EDITOR_CLI="bobide"
                     EDITOR_NAME="BobIDE"
-                    local editor_version=$("$EDITOR_CLI" --version | head -n 1)
+                    local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1 || echo "version unknown")
                     print_success "${EDITOR_NAME} selected: $editor_version"
+                    return
+                elif detect_bobide_fallback; then
                     return
                 else
                     print_error "BobIDE CLI (bobide) not found in PATH"
                     echo ""
-                    echo "Please install IBM Bob IDE and ensure the bobide CLI is available in PATH"
+                    echo "💡 TIP: If you're using Bob IDE, try pasting this command into Bob's"
+                    echo "    coding assistant instead of a regular terminal."
+                    echo "    The assistant can access Bob IDE's internal commands."
+                    echo ""
+                    echo "Otherwise, ensure the bobide CLI is available in PATH"
                     echo ""
                     exit 1
                 fi
@@ -134,14 +201,30 @@ select_editor() {
                 if command_exists code; then
                     EDITOR_CLI="code"
                     EDITOR_NAME="VSCode"
-                    local editor_version=$("$EDITOR_CLI" --version | head -n 1)
+                    local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1 || echo "version unknown")
                     print_success "${EDITOR_NAME} selected: $editor_version"
+                    return
+                elif detect_vscode_fallback; then
                     return
                 else
                     print_error "VSCode CLI (code) not found in PATH"
                     echo ""
-                    echo "Please install VSCode and ensure the 'code' command is available in PATH"
-                    echo "See: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line"
+                    echo "💡 TIP: Try one of these options:"
+                    echo ""
+                    echo "   Option 1 - Use Your Coding Assistant (Easiest):"
+                    echo "   Paste this installation command into your coding assistant"
+                    echo "   (VSCode Copilot, GitHub Copilot Chat, Bob IDE, etc.):"
+                    echo ""
+                    echo "   curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | bash -s vscode"
+                    echo ""
+                    echo "   Option 2 - Install the 'code' Command:"
+                    echo "   1. Open VSCode"
+                    echo "   2. Press Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows/Linux)"
+                    echo "   3. Type 'Shell Command: Install code command in PATH'"
+                    echo "   4. Select and run the command"
+                    echo "   5. Restart your terminal and try again"
+                    echo ""
+                    echo "   More info: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line"
                     echo ""
                     exit 1
                 fi
@@ -170,7 +253,7 @@ select_editor() {
     if [ ${#available_editors[@]} -eq 1 ]; then
         EDITOR_CLI="${available_editors[0]%%:*}"
         EDITOR_NAME="${available_editors[0]#*:}"
-        local editor_version=$("$EDITOR_CLI" --version | head -n 1)
+        local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1 || echo "version unknown")
         print_success "${EDITOR_NAME} found: $editor_version"
         return
     fi
@@ -200,7 +283,7 @@ select_editor() {
         esac
     done
     
-    local editor_version=$("$EDITOR_CLI" --version | head -n 1)
+    local editor_version=$("$EDITOR_CLI" --version 2>/dev/null | head -n 1 || echo "version unknown")
     print_success "${EDITOR_NAME} selected: $editor_version"
 }
 
