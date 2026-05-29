@@ -44,7 +44,6 @@ Ensure all these files are present before deploying:
 - ✅ `docs/index.html` - Landing page
 - ✅ `docs/install.html` - Installation guide
 - ✅ `docs/features.html` - Features documentation
-- ✅ `docs/oidc.html` - OIDC setup guide
 - ✅ `docs/manual.html` - Manual installation
 
 ### Styles
@@ -56,7 +55,6 @@ Ensure all these files are present before deploying:
 
 ### Scripts
 - ✅ `docs/scripts/install.sh` - Automated installer (254 lines)
-- ✅ `docs/scripts/oidc.sh` - OIDC setup wizard (330 lines)
 - ✅ `docs/scripts/get-credentials.sh` - OpenShift credentials (213 lines)
 
 ### Configuration
@@ -89,10 +87,7 @@ Ensure all these files are present before deploying:
    ```bash
    # Test install script help
    bash docs/scripts/install.sh --help
-   
-   # Test OIDC script help
-   bash docs/scripts/oidc.sh --help
-   ```
+      ```
 
 ### Accessibility Testing
 
@@ -116,13 +111,11 @@ Ensure all these files are present before deploying:
    - https://ibm-mas.github.io/maf-local-dev-mode/
    - https://ibm-mas.github.io/maf-local-dev-mode/install.html
    - https://ibm-mas.github.io/maf-local-dev-mode/features.html
-   - https://ibm-mas.github.io/maf-local-dev-mode/oidc.html
    - https://ibm-mas.github.io/maf-local-dev-mode/manual.html
 
 3. **Scripts Downloadable:**
    ```bash
    curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/install.sh | head -5
-   curl -fsSL https://ibm-mas.github.io/maf-local-dev-mode/scripts/oidc.sh | head -5
    ```
 
 4. **Assets Load:**
@@ -246,7 +239,6 @@ jobs:
       - name: Test Scripts
         run: |
           bash docs/scripts/install.sh --help
-          bash docs/scripts/oidc.sh --help
 ```
 
 ### Analytics (Optional)
