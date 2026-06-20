@@ -1,32 +1,12 @@
 # Maximo Application Configuration - Local Dev Mode
 
-A GitHub Pages site for the Maximo Developer Configuration Tools VSCode extension.
+A GitHub Pages site for the Maximo Developer Configuration Tools VSCode extension.  Local Dev Mode is an enhancment to the to the supported MAF Config tool that allows application configurators to download and configure apps using VSCode or BobIDE.
 
 🌐 **Live Site:** https://ibm-mas.github.io/maf-local-dev-mode/
 
-## Contributing
+## Current limitations
 
-### Adding New Pages
-
-1. Create HTML file in `/docs`
-2. Use existing pages as templates
-3. Update navigation in all pages
-4. Add to footer links
-5. Test responsive design
-
-### Updating Styles
-
-1. Edit `/docs/css/main.css` for core styles
-2. Edit `/docs/css/responsive.css` for breakpoints
-3. Test on mobile, tablet, and desktop
-4. Verify accessibility (WCAG AA)
-
-### Updating Scripts
-
-1. Edit scripts in `/docs/scripts/`
-2. Test locally before committing
-3. Update documentation if behavior changes
-4. Ensure error handling is robust
+* Only works with the release MAS-9.2 (Support for 9.1 comming)
 
 ## Support
 
