@@ -10,21 +10,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              slate: {
-                950: '#0a0a0a',
+              // Carbon Design System Light Theme Colors
+              'carbon-bg': '#ffffff',
+              'carbon-bg-hover': '#e5e5e5',
+              'carbon-layer': '#f4f4f4',
+              'carbon-layer-hover': '#e8e8e8',
+              'carbon-layer-accent': '#e0e0e0',
+              'carbon-field': '#ffffff',
+              'carbon-border-subtle': '#e0e0e0',
+              'carbon-border-strong': '#8d8d8d',
+              'carbon-text-primary': '#161616',
+              'carbon-text-secondary': '#525252',
+              'carbon-text-placeholder': '#a8a8a8',
+              'carbon-text-on-color': '#ffffff',
+              'carbon-link': '#0f62fe',
+              'carbon-link-hover': '#0043ce',
+              'carbon-blue': {
+                60: '#0f62fe',
+                70: '#0043ce',
+                80: '#002d9c',
               },
-              blue: {
-                400: '#78a9ff',
-                500: '#4589ff',
-                600: '#0f62fe',
-              },
-              emerald: {
-                400: '#42be65',
-                500: '#24a148',
+              'carbon-green': {
+                50: '#24a148',
+                60: '#198038',
               },
             },
             fontFamily: {
@@ -51,39 +62,41 @@
       }
     </style>
 </head>
-<body class="dark bg-slate-950 text-slate-100 font-sans antialiased">
+<body class="bg-carbon-bg text-carbon-text-primary font-sans antialiased">
     <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-400">Skip to main content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-carbon-blue-60 focus:text-carbon-text-on-color focus:rounded-lg focus:ring-2 focus:ring-carbon-blue-60">Skip to main content</a>
 
     <!-- Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 transition-transform duration-300">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-carbon-bg/95 backdrop-blur-sm border-b border-carbon-border-subtle transition-transform duration-300">
       <div class="container mx-auto px-6">
         <div class="flex items-center justify-between h-16">
-          <a href="index.html" class="flex items-center gap-3 text-xl font-semibold hover:text-blue-400 transition-colors">
-            <span class="text-2xl">⬡</span>
+          <a href="index.html" class="flex items-center gap-3 text-xl font-semibold hover:text-carbon-link transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 32 32" fill="currentColor">
+              <path d="M16 2L6 8v8c0 7.5 5 11.5 10 14 5-2.5 10-6.5 10-14V8l-10-6zm0 2.5L24 9v7c0 6-4 9.5-8 11.5-4-2-8-5.5-8-11.5V9l8-4.5z"/>
+            </svg>
             <span>Maximo Local Dev</span>
           </a>
           
           <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
-            <a href="index.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Home</a>
-            <a href="install.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Install</a>
-            <a href="features.html" class="nav-link text-blue-400 hover:text-blue-300 transition-colors font-medium" aria-current="page">Features</a>
-            <a href="manual.html" class="nav-link text-slate-300 hover:text-blue-400 transition-colors">Manual Install</a>
-            <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link text-slate-300 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="index.html" class="nav-link text-carbon-text-secondary hover:text-carbon-link transition-colors">Home</a>
+            <a href="install.html" class="nav-link text-carbon-text-secondary hover:text-carbon-link transition-colors">Install</a>
+            <a href="features.html" class="nav-link text-carbon-link hover:text-carbon-link-hover transition-colors font-medium" aria-current="page">Features</a>
+            <a href="manual.html" class="nav-link text-carbon-text-secondary hover:text-carbon-link transition-colors">Manual Install</a>
+            <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>
           
-          <button class="menu-toggle md:hidden text-2xl text-slate-300 hover:text-blue-400 transition-colors" aria-label="Toggle menu" aria-expanded="false">☰</button>
+          <button class="menu-toggle md:hidden text-2xl text-carbon-text-secondary hover:text-carbon-link transition-colors" aria-label="Toggle menu" aria-expanded="false">☰</button>
         </div>
       </div>
       
       <!-- Mobile Navigation -->
-      <nav class="nav md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900 border-l border-slate-800 transform translate-x-full transition-transform duration-300 ease-in-out" role="navigation" aria-label="Mobile navigation">
+      <nav class="nav md:hidden fixed inset-y-0 right-0 w-64 bg-carbon-bg border-l border-carbon-border-subtle transform translate-x-full transition-transform duration-300 ease-in-out" role="navigation" aria-label="Mobile navigation">
         <div class="flex flex-col gap-1 p-6 pt-20">
-          <a href="index.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Home</a>
-          <a href="install.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Install</a>
-          <a href="features.html" class="nav-link px-4 py-3 rounded-lg text-blue-400 bg-blue-500/10 font-medium">Features</a>
-          <a href="manual.html" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors">Manual Install</a>
-          <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="index.html" class="nav-link px-4 py-3 rounded-lg text-carbon-text-secondary hover:bg-carbon-layer hover:text-carbon-link transition-colors">Home</a>
+          <a href="install.html" class="nav-link px-4 py-3 rounded-lg text-carbon-text-secondary hover:bg-carbon-layer hover:text-carbon-link transition-colors">Install</a>
+          <a href="features.html" class="nav-link px-4 py-3 rounded-lg text-carbon-link bg-carbon-layer font-medium">Features</a>
+          <a href="manual.html" class="nav-link px-4 py-3 rounded-lg text-carbon-text-secondary hover:bg-carbon-layer hover:text-carbon-link transition-colors">Manual Install</a>
+          <a href="https://github.com/ibm-mas/maf-local-dev-mode" class="nav-link px-4 py-3 rounded-lg text-carbon-text-secondary hover:bg-carbon-layer hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </nav>
     </header>
@@ -91,11 +104,11 @@
     <!-- Main Content -->
     <main id="main-content" class="pt-16">
         <!-- Page Header -->
-        <section class="relative py-20 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950">
+        <section class="relative py-20 bg-gradient-to-br from-carbon-blue-60/10 via-carbon-bg to-carbon-bg">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">Features</h1>
-                    <p class="text-xl text-slate-300">Powerful tools to accelerate your Maximo application development</p>
+                    <p class="text-xl text-carbon-text-secondary">Powerful tools to accelerate your Maximo application development</p>
                 </div>
             </div>
         </section>
@@ -106,52 +119,65 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-12">Core Features</h2>
                 
                 <!-- MAS Authentication -->
-                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                <div class="feature-detail mb-16 bg-carbon-field rounded p-8 border border-carbon-border-subtle">
                     <div class="flex flex-col md:flex-row gap-6 mb-6">
-                        <div class="text-5xl">🔐</div>
+                        <svg class="w-16 h-16 text-carbon-blue-60 flex-shrink-0" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M21 2a8.998 8.998 0 0 0-8.612 11.612L2 24v6h6l10.388-10.388A9 9 0 1 0 21 2zm0 16a7.001 7.001 0 0 1-6.294-10.058l.366-.62-11.18 11.18L5.414 20H8v2.586l1.502 1.502L11 22.586V20h2.586l1.502-1.502L13.586 17H16v-2.586l1.502-1.502 11.18-11.18-.62.366A7 7 0 0 1 21 18z"/>
+                            <circle cx="21" cy="10" r="2"/>
+                        </svg>
                         <div class="flex-1">
                             <h3 class="text-2xl md:text-3xl font-bold mb-2">MAS Authentication with OAuth/OIDC</h3>
-                            <p class="text-lg text-slate-400">Seamless authentication to remote Maximo Application Suite environments</p>
+                            <p class="text-lg text-carbon-text-secondary">Seamless authentication to remote Maximo Application Suite environments</p>
                         </div>
                     </div>
                     <div class="space-y-6">
-                        <p class="text-slate-300">
-                            Connect securely to remote MAS environments using industry-standard OAuth 2.0 and OpenID Connect protocols. 
+                        <p class="text-carbon-text-secondary">
+                            Connect securely to remote MAS environments using industry-standard OAuth 2.0 and OpenID Connect protocols.
                             The extension handles token management, refresh, and secure storage automatically.
                         </p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Automatic token refresh</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Automatic token refresh</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Secure credential storage</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Secure credential storage</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Support for multiple environments</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Support for multiple environments</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">OpenShift integration</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">OpenShift integration</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Preview Server -->
-                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                <div class="feature-detail mb-16 bg-carbon-field rounded p-8 border border-carbon-border-subtle">
                     <div class="flex flex-col md:flex-row gap-6 mb-6">
-                        <div class="text-5xl">🚀</div>
+                        <svg class="w-16 h-16 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                          <path d="M17 2v6.59L22.71 14 17 19.41V26l11-11-11-13zm-2 0L4 13l11 13v-6.59L9.29 14 15 8.59V2z"/>
+                        </svg>
                         <div class="flex-1">
                             <h3 class="text-2xl md:text-3xl font-bold mb-2">Preview Server with Live Reload</h3>
-                            <p class="text-lg text-slate-400">See your changes instantly without redeploying</p>
+                            <p class="text-lg text-carbon-text-secondary">See your changes instantly without redeploying</p>
                         </div>
                     </div>
                     <div class="space-y-6">
-                        <p class="text-slate-300">
+                        <p class="text-carbon-text-secondary">
                             Launch a local development server that serves your Maximo application with live reload. 
                             Changes to XML configuration files are detected automatically and reflected in your browser 
                             without manual refresh.
@@ -160,57 +186,71 @@
                 </div>
 
                 <!-- Publish -->
-                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                <div class="feature-detail mb-16 bg-carbon-field rounded p-8 border border-carbon-border-subtle">
                     <div class="flex flex-col md:flex-row gap-6 mb-6">
-                        <div class="text-5xl">🚀</div>
+                        <svg class="w-16 h-16 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                          <path d="M17 2v6.59L22.71 14 17 19.41V26l11-11-11-13zm-2 0L4 13l11 13v-6.59L9.29 14 15 8.59V2z"/>
+                        </svg>
                         <div class="flex-1">
                             <h3 class="text-2xl md:text-3xl font-bold mb-2">Publish applications</h3>
-                            <p class="text-lg text-slate-400">Package and publish your applications to your connected server.</p>
+                            <p class="text-lg text-carbon-text-secondary">Package and publish your applications to your connected server.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Offline Cache -->
-                <div class="feature-detail mb-16 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+                <div class="feature-detail mb-16 bg-carbon-field rounded p-8 border border-carbon-border-subtle">
                     <div class="flex flex-col md:flex-row gap-6 mb-6">
-                        <div class="text-5xl">💾</div>
+                        <svg class="w-16 h-16 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                          <path d="M27.71 9.29l-5-5A1 1 0 0 0 22 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V10a1 1 0 0 0-.29-.71zM12 6h8v4h-8zm8 20h-8v-8h8zm2 0v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8H6V6h4v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.41l4 4V26z"/>
+                        </svg>
                         <div class="flex-1">
                             <h3 class="text-2xl md:text-3xl font-bold mb-2">Offline Cache Support</h3>
-                            <p class="text-lg text-slate-400">Work without constant network connectivity</p>
+                            <p class="text-lg text-carbon-text-secondary">Work without constant network connectivity</p>
                         </div>
                     </div>
                     <div class="space-y-6">
-                        <p class="text-slate-300">
-                            The extension caches application metadata, object structures, and configuration data locally. 
-                            This enables you to continue development even when disconnected from the MAS environment, 
+                        <p class="text-carbon-text-secondary">
+                            The extension caches application metadata, object structures, and configuration data locally.
+                            This enables you to continue development even when disconnected from the MAS environment,
                             with automatic synchronization when connectivity is restored.
                         </p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Smart caching strategy</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Smart caching strategy</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Automatic sync on reconnect</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Automatic sync on reconnect</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Cache invalidation</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Cache invalidation</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="text-emerald-400 text-xl">✓</span>
-                                <span class="text-slate-300">Offline indicators</span>
+                                <svg class="w-5 h-5 text-carbon-green-50" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M13 24l-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"/>
+                                </svg>
+                                <span class="text-carbon-text-secondary">Offline indicators</span>
                             </div>
                         </div>
 
-                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+                        <div class="bg-carbon-blue-60/10 border border-carbon-blue-60/30 rounded p-6">
                             <div class="flex gap-4">
-                                <div class="text-2xl">💡</div>
+                                <svg class="w-6 h-6 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                                  <path d="M17 2v6.59L22.71 14 17 19.41V26l11-11-11-13zm-2 0L4 13l11 13v-6.59L9.29 14 15 8.59V2z"/>
+                                </svg>
                                 <div>
-                                    <strong class="text-blue-400">Cache Location:</strong>
-                                    <p class="text-slate-300 mt-2">Cache files are stored in <code class="px-2 py-1 bg-slate-800 rounded text-emerald-400 font-mono text-sm">~/.maximo-dev-tools/cache/</code></p>
+                                    <strong class="text-carbon-text-primary">Cache Location:</strong>
+                                    <p class="text-carbon-text-secondary mt-2">Cache files are stored in <code class="px-2 py-1 bg-carbon-layer rounded text-carbon-green-50 font-mono text-sm">~/.maximo-dev-tools/cache/</code></p>
                                 </div>
                             </div>
                         </div>
@@ -219,42 +259,54 @@
 
                 <!-- Additional Core Features (Application Panel, XML Diff, Self-Signed Certs) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
-                        <div class="text-4xl mb-4">📊</div>
+                    <div class="feature-card bg-carbon-field rounded p-6 border border-carbon-border-subtle hover:border-carbon-blue-60 transition-all duration-300">
+                        <svg class="w-12 h-12 mb-4 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M28 4H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 6h24v4H4zm0 6h7v14H4zm9 14V12h15v14z"/>
+                        </svg>
                         <h3 class="text-xl font-semibold mb-3">Application Panel</h3>
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-carbon-text-secondary mb-4">
                             Visual overview of your Maximo application structure with tree view navigation and quick file access.
                         </p>
                     </div>
 
-                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
-                        <div class="text-4xl mb-4">🔍</div>
+                    <div class="feature-card bg-carbon-field rounded p-6 border border-carbon-border-subtle hover:border-carbon-blue-60 transition-all duration-300">
+                        <svg class="w-12 h-12 mb-4 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                          <path d="M29 27.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29zM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9z"/>
+                        </svg>
                         <h3 class="text-xl font-semibold mb-3">XML Diff Tools</h3>
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-carbon-text-secondary mb-4">
                             Compare and merge configuration changes with semantic XML comparison and three-way merge.
                         </p>
                     </div>
 
-                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
-                        <div class="text-4xl mb-4">🛡️</div>
+                    <div class="feature-card bg-carbon-field rounded p-6 border border-carbon-border-subtle hover:border-carbon-blue-60 transition-all duration-300">
+                        <svg class="w-12 h-12 mb-4 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L6 8v8c0 7.5 5 11.5 10 14 5-2.5 10-6.5 10-14V8l-10-6zm0 2.5L24 9v7c0 6-4 9.5-8 11.5-4-2-8-5.5-8-11.5V9l8-4.5z"/>
+                            <path d="M14 16l-3-3-1.5 1.5L14 19l7-7-1.5-1.5L14 16z"/>
+                        </svg>
                         <h3 class="text-xl font-semibold mb-3">Self-Signed Certificates</h3>
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-carbon-text-secondary mb-4">
                             Work with development environments using self-signed certificates with configurable trust settings.
                         </p>
                     </div>
 
-                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
-                        <div class="text-4xl mb-4">🌿</div>
+                    <div class="feature-card bg-carbon-field rounded p-6 border border-carbon-border-subtle hover:border-carbon-blue-60 transition-all duration-300">
+                        <svg class="w-12 h-12 mb-4 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M30.428 14.663L17.347 1.582a2.002 2.002 0 0 0-2.833 0L11.83 4.266l3.574 3.574a2.38 2.38 0 0 1 3.012 3.012l3.445 3.445a2.38 2.38 0 1 1-1.423 1.423l-3.211-3.211v8.45a2.38 2.38 0 1 1-1.904 0v-8.532a2.38 2.38 0 0 1-1.29-3.122L10.46 5.732 1.582 14.61a2.002 2.002 0 0 0 0 2.833l13.081 13.081a2.002 2.002 0 0 0 2.833 0l13.02-13.02a2.002 2.002 0 0 0-.088-2.841z"/>
+                        </svg>
                         <h3 class="text-xl font-semibold mb-3">Git integration</h3>
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-carbon-text-secondary mb-4">
                             Use git to track your changes
                         </p>
                     </div>
 
-                    <div class="feature-card bg-slate-900 rounded-xl p-6 border border-slate-800 hover:border-blue-500 transition-all duration-300">
-                        <div class="text-4xl mb-4">⚠️</div>
+                    <div class="feature-card bg-carbon-field rounded p-6 border border-carbon-border-subtle hover:border-carbon-blue-60 transition-all duration-300">
+                        <svg class="w-12 h-12 mb-4 text-carbon-blue-60" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L2 28h28L16 2zm0 5.5L25.5 26h-19L16 7.5z"/>
+                            <path d="M15 12h2v8h-2zm0 10h2v2h-2z"/>
+                        </svg>
                         <h3 class="text-xl font-semibold mb-3">File protection</h3>
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-carbon-text-secondary mb-4">
                             Warn when you modify core application files that are not upgradeable
                         </p>
                     </div>
@@ -266,45 +318,45 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+    <footer class="bg-carbon-layer border-t border-carbon-border-subtle py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Maximo Local Dev Mode</h3>
-                    <p class="text-slate-400 text-sm">
+                    <p class="text-carbon-text-secondary text-sm">
                         Streamline your Maximo application development with local configuration management and live preview.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-slate-300">Documentation</h4>
+                    <h4 class="font-semibold mb-4 text-carbon-text-primary">Documentation</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="install.html" class="text-slate-400 hover:text-blue-400 transition-colors">Installation</a></li>
-                        <li><a href="features.html" class="text-slate-400 hover:text-blue-400 transition-colors">Features</a></li>
-                        <li><a href="manual.html" class="text-slate-400 hover:text-blue-400 transition-colors">Manual Install</a></li>
+                        <li><a href="install.html" class="text-carbon-text-secondary hover:text-carbon-link transition-colors">Installation</a></li>
+                        <li><a href="features.html" class="text-carbon-text-secondary hover:text-carbon-link transition-colors">Features</a></li>
+                        <li><a href="manual.html" class="text-carbon-text-secondary hover:text-carbon-link transition-colors">Manual Install</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-slate-300">Resources</h4>
+                    <h4 class="font-semibold mb-4 text-carbon-text-primary">Resources</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
-                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Releases</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode" class="text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/issues" class="text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">Report Issues</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/releases" class="text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">Releases</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-slate-300">Community</h4>
+                    <h4 class="font-semibold mb-4 text-carbon-text-primary">Community</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Discussions</a></li>
-                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/blob/main/CONTRIBUTING.md" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/discussions" class="text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+                        <li><a href="https://github.com/ibm-mas/maf-local-dev-mode/blob/main/CONTRIBUTING.md" class="text-carbon-text-secondary hover:text-carbon-link transition-colors" target="_blank" rel="noopener noreferrer">Contributing</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-slate-800 pt-8">
-                <p class="text-center text-slate-500 text-sm">
+            <div class="border-t border-carbon-border-subtle pt-8">
+                <p class="text-center text-carbon-text-placeholder text-sm">
                     © 2026 IBM.
                 </p>
             </div>
